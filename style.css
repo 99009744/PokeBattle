@@ -1,0 +1,76 @@
+body{
+    background-color: black;
+}
+#battle_container{
+    background-image: url("background.png");
+    background-size: cover;
+    width: 1600px;
+    height: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.stats{
+    height: 15%;
+    width: 35%;
+    background-color: rgb(229, 229, 149);
+    border: 3px solid black;
+}
+#pokemon_ally_pic{
+    width: 400px;
+    height: 400px;
+    background-color: blueviolet;
+    position: absolute;
+    left: 20%;
+    bottom: 25%;
+}
+#pokemon_enemy_pic{
+    width: 400px;
+    height: 400px;
+    background-color: crimson;
+    position: absolute;
+    right: 10%;
+    top: 5%;
+}
+#pokemon_ally_stats{
+    position: absolute;
+    bottom: 25%;
+    right: 3%;
+}
+#pokemon_enemy_stats{
+    position: absolute;
+    top: 3%;
+    left: 3%;
+}
+#text_area{
+    width: 80%;
+    height: 20%;
+    background-color: whitesmoke;
+    border: black solid 3px;
+    position: absolute;
+    bottom: 3%;
+    left: 10%;
+}
+.state{
+    height: 90%;
+    width: 90%;
+    margin: 10px auto;
+}
+#text_state{
+    display: none;
+}
+#battle_state{
+    display: inline-block;
+}
+#battle_options_div{
+    width: 40%;
+    height: 100%;
+    position: absolute;
+    right: 0px;
+}
+.battle_options{
+    background-color: rgb(229, 229, 149);
+    border: black solid 3px;
+    width: 250px;
+    height: 75px;
+}
