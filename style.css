@@ -1,6 +1,13 @@
 body{
     background-color: black;
 }
+h3{
+    padding: 0px;
+    margin: 20px;
+}
+p{
+    display: inline-block;
+}
 #battle_container{
     background-image: url("background.png");
     background-size: cover;
@@ -15,11 +22,13 @@ body{
     width: 35%;
     background-color: rgb(229, 229, 149);
     border: 3px solid black;
+    font-size: 24px;
+    padding: 0px;
+    margin: 0px;
 }
 #pokemon_ally_pic{
     width: 400px;
     height: 400px;
-    background-color: blueviolet;
     position: absolute;
     left: 20%;
     bottom: 25%;
@@ -27,7 +36,6 @@ body{
 #pokemon_enemy_pic{
     width: 400px;
     height: 400px;
-    background-color: crimson;
     position: absolute;
     right: 10%;
     top: 5%;
@@ -55,12 +63,27 @@ body{
     height: 90%;
     width: 90%;
     margin: 10px auto;
+    position: absolute;
+    left: 35px;
+    top: 25px;
+    font-size: 24px;
 }
 #text_state{
-    display: none;
+    display: inline-block;
+}
+#text_state_btn{
+    width: 100px;
+    height: 60px;
+    display: inline-block;
 }
 #battle_state{
-    display: inline-block;
+    display: none;
+}
+#battle_text{
+    position: absolute;
+    left: 35px;
+    top: 25px;
+    font-size: 24px;
 }
 #battle_options_div{
     width: 40%;
@@ -71,6 +94,7 @@ body{
 .battle_options{
     background-color: rgb(229, 229, 149);
     border: black solid 3px;
-    width: 250px;
+    width: 200px;
     height: 75px;
+    font-size: 24px;
 }
