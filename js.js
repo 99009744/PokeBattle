@@ -8,3 +8,7 @@ function text_state_btn(){
     var battle_text = document.getElementById("battle_text");
     battle_text.innerHTML = "What attack do you want to use?";
 }
+
+function start($move){
+    console.log($move);
+}

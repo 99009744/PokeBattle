@@ -1,9 +1,50 @@
 <?php
-    require "pokemons.php";
-    require "ally_pokemon.php";
-    require "enemy_pokemon.php";
-    $pikachu = new AllyPokemon('Pikachu', 'img/pikachu.png', 'Pika','Lightning', '60', 'Fire', 'Fighting' ,['Electric Ring', 'Pika Punch']);
-    $charmeleon = new EnemyPokemon('Charmeleon', 'img/charmeleon.webp','NotPikachu', 'Fire','60', 'Water', 'Lightning', ['Head Butt', 'Flare']);
+    declare(strict_types=1);
+    include_once "Move.php";
+    include_once "Type.php";
+    include_once "PokemonCollection.php";
+    include_once "MoveCollection.php";
+    include_once "Pokemon.php";
+    
+    /*
+        * Moves
+        * ( Name, Damage )
+    */
+
+    $electric_ring = new Move ('Electric Ring',50);
+    $pikaPunch = new Move ('Pika Punch',20);
+    $headButt = new Move ('Head Butt',10);
+    $flare = new Move ('Flare',30);
+
+    /*
+        * Collection Moves
+    */
+
+    $pikachuMoveCollection = new MoveCollection([$electric_ring, $pikaPunch]);
+    $charmeleonMoveCollection = new MoveCollection([$headButt, $flare]);
+
+    /*
+        * Types
+        * ( Type, Weakness, Resistances )
+    */
+
+    $lightning = new Type ('Lightning',['Water'],['Rock']);
+    $fire = new Type ('Fire',['Water'],['Lightning']);
+
+    /*
+        * Pokemons
+        * ( Name, Allied, Image, Nickname, Type, Hitpoints, Moves )
+    */
+
+    $pikachu = new Pokemon('Pikachu', true ,'img/pikachu.png', 'Pika',[$lightning], 60, $pikachuMoveCollection);
+    $charmeleon = new Pokemon('Charmeleon', false ,'img/charmeleon.webp','NotPikachu', [$fire], 60, [$charmeleonMoveCollection]);
+    
+    /*
+        * Collection Pokemons
+    */
+
+    $collection = new PokemonCollection ([$pikachu, $charmeleon]);
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,21 +57,21 @@
 </head>
 <body>
     <div id="battle_container">
-        <div id="pokemon_ally_pic" class="pic" style="background-image: url('<?= $pikachu->makeImg() ?>'); background-size: cover;">
+        <div id="pokemon_ally_pic" class="pic" style="background-image: url('<?= $pikachu->getImage() ?>'); background-size: cover;">
            
         </div>
         <div id="pokemon_ally_stats" class="stats">
-            <h3><? print_r($pikachu->showName())?></h3>
-            <h3>HP: <? print_r($pikachu->showHp())?></h3>
+            <h3><?= $pikachu->getName()?></h3>
+            <h3>HP: <?= $pikachu->getHitpoints()?></h3>
         </div>
-        <div id="pokemon_enemy_pic" class="pic" style="background-image: url('<?= $charmeleon->makeImg() ?>'); background-size: cover;"></div>
+        <div id="pokemon_enemy_pic" class="pic" style="background-image: url('<?= $charmeleon->getImage() ?>'); background-size: cover;"></div>
         <div id="pokemon_enemy_stats" class="stats">
-            <h3><? print_r($charmeleon->showName())?></h3>
-            <h3>HP: <? print_r($charmeleon->showHp())?></h3>
+            <h3><?= $charmeleon->getNickname() ?></h3>
+            <h3>HP: <?= $charmeleon->getHitpoints() ?></h3>
         </div>
         <div id="text_area">
             <div id="text_state" class="state">
-                <p>A wild <?= $charmeleon->showName() ?> has appeard</p>
+                <p>A wild <?= $charmeleon->getNickname() ?> has appeard</p>
                 <button id="text_state_btn" onclick="text_state_btn()">Next</button>
             </div>
             <div id="battle_state"  class="state">
@@ -38,7 +79,14 @@
                     
                 </div>
                 <div id="battle_options_div">
-                    <? $pikachu->showAttack(); ?>
+                    <? 
+                    foreach($pikachu->getMoves() as $move)
+                    {
+                    ?>
+                        <button onclick="start($move)" class="battle_options" value="<?= $move->getDamage() ?>"><?= $move->getName() ?></button>
+                    <? 
+                    } 
+                    ?>
                 </div>
             </div>
         </div>
