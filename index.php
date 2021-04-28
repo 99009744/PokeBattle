@@ -17,13 +17,6 @@
     $flare = new Move ('Flare',30);
 
     /*
-        * Collection Moves
-    */
-
-    $pikachuMoveCollection = new MoveCollection([$electric_ring, $pikaPunch]);
-    $charmeleonMoveCollection = new MoveCollection([$headButt, $flare]);
-
-    /*
         * Types
         * ( Type, Weakness, Resistances )
     */
@@ -36,8 +29,8 @@
         * ( Name, Allied, Image, Nickname, Type, Hitpoints, Moves )
     */
 
-    $pikachu = new Pokemon('Pikachu', true ,'img/pikachu.png', 'Pika',[$lightning], 60, $pikachuMoveCollection);
-    $charmeleon = new Pokemon('Charmeleon', false ,'img/charmeleon.webp','NotPikachu', [$fire], 60, [$charmeleonMoveCollection]);
+    $pikachu = new Pokemon('Pikachu', true ,'img/pikachu.png', 'Pika',[$lightning], 60, 60, new MoveCollection([$electric_ring, $pikaPunch]));
+    $charmeleon = new Pokemon('Charmeleon', false ,'img/charmeleon.webp','NotPikachu', [$fire], 60, 60, new MoveCollection([$headButt, $flare]));
     
     /*
         * Collection Pokemons
@@ -61,27 +54,36 @@
            
         </div>
         <div id="pokemon_ally_stats" class="stats">
-            <h3><?= $pikachu->getName()?></h3>
-            <h3>HP: <?= $pikachu->getHitpoints()?></h3>
+            <h3><?= $pikachu->getNickname()?></h3>
+            <h3>HP: <?= $pikachu->getCurrentHitpoints()?>/<?= $pikachu->getTotalHitpoints()?></h3>
         </div>
         <div id="pokemon_enemy_pic" class="pic" style="background-image: url('<?= $charmeleon->getImage() ?>'); background-size: cover;"></div>
         <div id="pokemon_enemy_stats" class="stats">
             <h3><?= $charmeleon->getNickname() ?></h3>
-            <h3>HP: <?= $charmeleon->getHitpoints() ?></h3>
+            <h3>HP: <?= $charmeleon->getCurrentHitpoints() ?>/<?= $charmeleon->getTotalHitpoints() ?></h3>
         </div>
         <div id="text_area">
-            <div id="text_state" class="state">
+            <div id="text_state" class="visibleState">
                 <p>A wild <?= $charmeleon->getNickname() ?> has appeard</p>
                 <button id="text_state_btn" onclick="text_state_btn()">Next</button>
             </div>
-            <div id="battle_state"  class="state">
+            <div id="options_state" class="invisibleState">
+                <div id="options_text">
+                </div>
+                <div id="options_btns">
+                <button onclick="showFightOptions()" class="fight_options" id="option_fight">FIGHT!</button>
+                <button onclick="" class="fight_options"id="option_pokemon">Pokemons</button>
+                </div>
+            </div>
+            <div id="battle_state"  class="invisibleState">
                 <div id="battle_text">
                     
                 </div>
                 <div id="battle_options_div">
                     <? 
-                    foreach($pikachu->getMoves() as $move)
-                    {
+                    $moves = $pikachu->getMoves();
+                    foreach($moves->getData() as $move)
+                    { 
                     ?>
                         <button onclick="start($move)" class="battle_options" value="<?= $move->getDamage() ?>"><?= $move->getName() ?></button>
                     <? 

@@ -59,7 +59,38 @@ p{
     bottom: 3%;
     left: 10%;
 }
-.state{
+
+#options_text{
+    position: absolute;
+    left: 35px;
+    top: 25px;
+    font-size: 24px;
+}
+#options_btns{
+    width: 40%;
+    height: 100%;
+    position: absolute;
+    right: 0px;
+}
+#option_fight{
+    background-color: red;
+}
+#option_pokemon{
+    background-color: lightblue;
+}
+.fight_options{
+    border: black solid 3px;
+    width: 200px;
+    height: 75px;
+    font-size: 24px;
+}
+#text_state_btn{
+    width: 100px;
+    height: 60px;
+    display: inline-block;
+}
+.invisibleState{
+    display: none;
     height: 90%;
     width: 90%;
     margin: 10px auto;
@@ -68,18 +99,17 @@ p{
     top: 25px;
     font-size: 24px;
 }
-#text_state{
-    display: none;
-}
-#text_state_btn{
-    width: 100px;
-    height: 60px;
+.visibleState{
     display: inline-block;
+    height: 90%;
+    width: 90%;
+    margin: 10px auto;
+    position: absolute;
+    left: 35px;
+    top: 25px;
+    font-size: 24px;
 }
-#battle_state{
-    display: inline-block;
-}
-#battle_text{
+.text{
     position: absolute;
     left: 35px;
     top: 25px;

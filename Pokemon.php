@@ -7,17 +7,19 @@
         private $image;
         private $nickname;
         private $types;
-        private $hitpoints;
+        private $totalHitpoints;
+        private $currentHitpoints;
         private $moves;
 
-        public function __construct( string $name, bool $allied, string $image, string $nickname, $types, int $hitpoints, MoveCollection $moves)
+        public function __construct( string $name, bool $allied, string $image, string $nickname, $types, int $totalHitpoints, int $currentHitpoints, ArrayCollection $moves)
     {
         $this->name = $name;
         $this->allied = $allied;
         $this->image = $image;
         $this->nickname = $nickname;
         $this->types = $types;
-        $this->hitpoints = $hitpoints;
+        $this->totalHitpoints = $totalHitpoints;
+        $this->currentHitpoints = $currentHitpoints;
         $this->moves = $moves;
     }
     
@@ -46,12 +48,16 @@
         return $this->types;
     }
 
-    public function getHitpoints(): int
+    public function getTotalHitpoints(): int
     {
-        return $this->hitpoints;
+        return $this->totalHitpoints;
+    }
+    public function getCurrentHitpoints(): int
+    {
+        return $this->currentHitpoints;
     }
 
-    public function getMoves(): array
+    public function getMoves()
     {
         return $this->moves;
     }

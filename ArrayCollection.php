@@ -7,6 +7,7 @@
         {
             foreach($data as $object)
             {
+                
                 if(get_class($object) !== $this->getTarget())
                 {
                     throw new Exception("");
@@ -17,7 +18,7 @@
 
         public function getData(): array
         {
-            return $this->$data;
+            return $this->data;
         }
         abstract protected function getTarget(): string ;
 

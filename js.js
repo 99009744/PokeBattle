@@ -1,14 +1,19 @@
+var text_state = document.getElementById("text_state");
+var option_state = document.getElementById("options_state");
+var battle_state = document.getElementById("battle_state");
+var option_text = document.getElementById("options_text");
+var battle_text = document.getElementById("battle_text");
+
 function text_state_btn(){
-    var text_state = document.getElementById("text_state");
-    text_state.style.display = "none";
-
-    var battle_state = document.getElementById("battle_state");
-    battle_state.style.display = "inline-block";
-
-    var battle_text = document.getElementById("battle_text");
-    battle_text.innerHTML = "What attack do you want to use?";
+    
+    text_state.className = "invisibleState";
+    option_state.className = "visibleState";
+    
+    option_text.innerHTML = "What do you want to do?";
 }
 
-function start($move){
-    console.log($move);
+function showFightOptions(){
+    option_state.className = "invisibleState";
+    battle_state.className = "visibleState";
+    battle_text.innerHTML = "What move do you want to use?"
 }
