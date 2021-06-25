@@ -1,12 +1,14 @@
 <?php
     declare(strict_types=1);
-    include_once "Pokemon.php";
-    include_once "Pikachu.php";
-    include_once "Charmeleon.php";
+    spl_autoload_register(function($className) {
+        $file = $className . '.php';
+        if (file_exists($file)) {
+            include $file;
+        }
+    });
     
     $pikachu = new Pikachu();
     $charmeleon = new Charmeleon();
-    
     
 ?>
 <!DOCTYPE html>
@@ -28,7 +30,14 @@
         print_r($charmeleon->getName() . ' attacks ' . $pikachu->getName() . ' with ' . $charmeleon->getMoves()[1][0] . '<br>');
         print_r($charmeleon->getName() . ' deals ' . $pikachu->calculateDamage($charmeleon->getType(),$charmeleon->getMoves()[1][1]) . ' damage to ' . $pikachu->getName() . '<br>');
         print_r($pikachu->getName() .  ' now has ' . $pikachu->dealsDamage( $pikachu->calculateDamage($charmeleon->getType(),$charmeleon->getMoves()[1][1])) . ' hitpoints<br>');
-        print_r(Pokemon::$population);
+        if($pikachu->getCurrentHitpoints() <= 0){
+            print_r('<br> Pikachu has died!');
+            
+        }
+        if($charmeleon->getCurrentHitpoints() <= 0){
+            print_r('<br> Charmeleon has died!');
+        }
+        print_r('<br> Total living Pokemon: ' . Pokemon::getPopulation() );
     ?>
 </body>
 </html>

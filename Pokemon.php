@@ -9,12 +9,10 @@
         private $moves;
         private $weakness;
         private $resistance;
-        public static $population = 0;
-        
+        private static $population = 0;
 
         public function __construct( string $name, string $type, int $totalHitpoints, int $currentHitpoints, array $moves, array $weakness, array $resistance)
     {
-        $this->population = $population + 1;
         $this->name = $name;
         $this->type = $type;
         $this->totalHitpoints = $totalHitpoints;
@@ -22,6 +20,7 @@
         $this->moves = $moves;
         $this->weakness = $weakness;
         $this->resistance = $resistance;
+        self::$population++;
     }
     
     public function getName(): string
@@ -38,7 +37,7 @@
     {
         return $this->totalHitpoints;
     }
-    public function getCurrentHitpoints(): int
+    public function getCurrentHitpoints()
     {
         return $this->currentHitpoints;
     }
@@ -55,6 +54,7 @@
     {
         return $this->resistance;
     }
+
     public function calculateDamage($attackType,$attackDamage): float
     {
         if($attackType == $this->weakness[0]){
@@ -65,13 +65,24 @@
         }
         return $attackDamage;
     }
-    public function dealsDamage($damage): float
+    public function dealsDamage($damage) : float
     {
-        return $this->currentHitpoints - $damage;
+        $this->currentHitpoints -= $damage;
+        if ($this->currentHitpoints <= 0)
+        {
+            $this->currentHitpoints = 0;
+            Pokemon::pokemonDied();
+            return $this->currentHitpoints;
+        }
+        return $this->currentHitpoints;
     }
-    public function getPopulation()
+    public static function getPopulation() : int
     {
-        return $this->population;
+        return static::$population;
+    }
+    public static function pokemonDied()
+    {
+        static::$population--;
     }
 }
     
